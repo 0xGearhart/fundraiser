@@ -270,11 +270,12 @@ For production use, consider:
 | `receive`  | ~71,259  |
 | `fallback` | ~104,750 |
 
-Generate gas snapshot:
+Generate gas report:
 
 ```bash
 forge test --gas-report
 ```
+Generate gas snapshot:
 
 ```bash
 forge snapshot
