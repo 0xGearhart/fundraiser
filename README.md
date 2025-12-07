@@ -84,7 +84,7 @@ foundry-fundraiser/
 ├── script/
 │   ├── DeployFundMe.s.sol     # Deployment script
 │   ├── HelperConfig.s.sol     # Network configuration
-│   └── Interactions.s.sol     # Fund and withdraw 
+│   └── Interactions.s.sol     # Fund and withdraw interaction scripts
 ├── test/
 │   ├── unit/
 │   │   └── FundMeTest.t.sol
@@ -218,7 +218,7 @@ make deploy ARGS="--network sepolia"
 Or using forge directly:
 
 ```bash
-forge script script/DeployContract.s.sol:DeployContract --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY -vvvv
+forge script script/DeployFundMe.s.sol:DeployFundMe --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY -vvvv
 ```
 
 ### Verify Contract
@@ -226,7 +226,7 @@ forge script script/DeployContract.s.sol:DeployContract --rpc-url $SEPOLIA_RPC_U
 If automatic verification fails:
 
 ```bash
-forge verify-contract <CONTRACT_ADDRESS> src/MainContract.sol:MainContract --chain-id 11155111 --etherscan-api-key $ETHERSCAN_API_KEY
+forge verify-contract <CONTRACT_ADDRESS> src/FundMe.sol:FundMe --chain-id 11155111 --etherscan-api-key $ETHERSCAN_API_KEY
 ```
 
 ### Deployment Addresses
