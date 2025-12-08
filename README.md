@@ -75,7 +75,7 @@ FundMe is a fundraising contract that accepts ETH donations above a minimum USD 
           └─────────────────────┘
 ```
 
-**Contract Structure:**
+**Repository Structure:**
 ```
 foundry-fundraiser/
 ├── src/
