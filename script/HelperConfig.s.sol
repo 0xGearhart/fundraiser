@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.18;
+pragma solidity 0.8.33;
 
 import {Script} from "forge-std/Script.sol";
 import {MockV3Aggregator} from "../test/mocks/mockV3Aggregator.sol";
@@ -31,9 +31,7 @@ contract HelperConfig is Script {
         // price feed address for mainnet
         // Mainnet ETH / USD Address
         // https://docs.chain.link/data-feeds/price-feeds/addresses
-        NetworkConfig memory mainnetConfig = NetworkConfig({
-            priceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
-        });
+        NetworkConfig memory mainnetConfig = NetworkConfig({priceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419});
         return mainnetConfig;
     }
 
@@ -41,9 +39,7 @@ contract HelperConfig is Script {
         // price feed address for Sepolia test network
         // Sepolia ETH / USD Address
         // https://docs.chain.link/data-feeds/price-feeds/addresses
-        NetworkConfig memory sepoliaConfig = NetworkConfig({
-            priceFeed: 0x694AA1769357215DE4FAC081bf1f309aDC325306
-        });
+        NetworkConfig memory sepoliaConfig = NetworkConfig({priceFeed: 0x694AA1769357215DE4FAC081bf1f309aDC325306});
         return sepoliaConfig;
     }
 
@@ -55,16 +51,11 @@ contract HelperConfig is Script {
 
         // deploy mock price feed contracts
         vm.startBroadcast();
-        MockV3Aggregator mockPriceFeed = new MockV3Aggregator(
-            DECIMALS,
-            INITIAL_ANSWER
-        );
+        MockV3Aggregator mockPriceFeed = new MockV3Aggregator(DECIMALS, INITIAL_ANSWER);
         vm.stopBroadcast();
 
         // price feed address for mock contracts on anvil
-        NetworkConfig memory anvilConfig = NetworkConfig({
-            priceFeed: address(mockPriceFeed)
-        });
+        NetworkConfig memory anvilConfig = NetworkConfig({priceFeed: address(mockPriceFeed)});
         return anvilConfig;
     }
 }

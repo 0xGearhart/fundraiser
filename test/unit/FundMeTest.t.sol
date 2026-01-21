@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.18;
+pragma solidity 0.8.33;
 
 import {Test, console} from "forge-std/Test.sol";
 import {FundMe} from "../../src/FundMe.sol";
@@ -56,19 +56,13 @@ contract FundMeTest is Test {
 
     function testFundFailsWithoutEnoughEth() public {
         vm.expectRevert(
-            abi.encodeWithSelector(
-                FundMe.FundMe__EthSentIsLessThanMinimumDonation.selector,
-                0,
-                MINIMUM_DOLLAR_AMOUNT
-            )
+            abi.encodeWithSelector(FundMe.FundMe__EthSentIsLessThanMinimumDonation.selector, 0, MINIMUM_DOLLAR_AMOUNT)
         );
         fundMe.fund();
 
         vm.expectRevert(
             abi.encodeWithSelector(
-                FundMe.FundMe__EthSentIsLessThanMinimumDonation.selector,
-                INVALID_FUND_VALUE,
-                MINIMUM_DOLLAR_AMOUNT
+                FundMe.FundMe__EthSentIsLessThanMinimumDonation.selector, INVALID_FUND_VALUE, MINIMUM_DOLLAR_AMOUNT
             )
         );
         fundMe.fund{value: INVALID_FUND_VALUE}();
@@ -89,9 +83,7 @@ contract FundMeTest is Test {
 
     function testOnlyOwnerCanWithdraw() public funded {
         vm.prank(USER);
-        vm.expectRevert(
-            abi.encodeWithSelector(FundMe.FundMe__NotOwner.selector)
-        );
+        vm.expectRevert(abi.encodeWithSelector(FundMe.FundMe__NotOwner.selector));
         fundMe.withdraw();
     }
 
@@ -99,13 +91,9 @@ contract FundMeTest is Test {
         // Arrange
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
-        uint256 expectedBalanceAfterWithdraw = startingOwnerBalance +
-            FUND_VALUE;
+        uint256 expectedBalanceAfterWithdraw = startingOwnerBalance + FUND_VALUE;
         assertEq(startingFundMeBalance, FUND_VALUE);
-        assertEq(
-            startingOwnerBalance + startingFundMeBalance,
-            expectedBalanceAfterWithdraw
-        );
+        assertEq(startingOwnerBalance + startingFundMeBalance, expectedBalanceAfterWithdraw);
         // Act
         // uint256 gasStart = gasleft();
         // vm.txGasPrice(GAS_PRICE);
@@ -132,8 +120,7 @@ contract FundMeTest is Test {
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
         assertEq(startingFundMeBalance, FUND_VALUE * numberOfFunders);
-        uint256 expectedBalanceAfterWithdraw = startingOwnerBalance +
-            startingFundMeBalance;
+        uint256 expectedBalanceAfterWithdraw = startingOwnerBalance + startingFundMeBalance;
 
         // ACT
         // vm.txGasPrice(GAS_PRICE);
@@ -147,7 +134,7 @@ contract FundMeTest is Test {
 
     function testFallbackFunction() public {
         vm.prank(USER);
-        (bool success, ) = address(fundMe).call{value: FUND_VALUE}("donate()");
+        (bool success,) = address(fundMe).call{value: FUND_VALUE}("donate()");
         assert(success);
 
         uint256 amountFunded = fundMe.getAmountFundedByAddress(USER);
@@ -158,7 +145,7 @@ contract FundMeTest is Test {
 
     function testReceiveFunction() public {
         vm.prank(USER);
-        (bool success, ) = address(fundMe).call{value: FUND_VALUE}("");
+        (bool success,) = address(fundMe).call{value: FUND_VALUE}("");
         assert(success);
 
         uint256 amountFunded = fundMe.getAmountFundedByAddress(USER);
@@ -170,13 +157,9 @@ contract FundMeTest is Test {
     function testReceiveFunctionFailsWithoutEnoughEth() public {
         vm.prank(USER);
         vm.expectRevert(
-            abi.encodeWithSelector(
-                FundMe.FundMe__EthSentIsLessThanMinimumDonation.selector,
-                0,
-                MINIMUM_DOLLAR_AMOUNT
-            )
+            abi.encodeWithSelector(FundMe.FundMe__EthSentIsLessThanMinimumDonation.selector, 0, MINIMUM_DOLLAR_AMOUNT)
         );
-        (bool success, ) = address(fundMe).call{value: INVALID_FUND_VALUE}("");
+        (bool success,) = address(fundMe).call{value: INVALID_FUND_VALUE}("");
         assert(!success);
         assertEq(fundMe.getAmountFundedByAddress(USER), 0);
     }
