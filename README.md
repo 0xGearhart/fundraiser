@@ -295,6 +295,7 @@ Generate gas report and save to .txt file:
 ```bash
 make gas-report
 ```
+
 Generate gas snapshot:
 
 ```bash
