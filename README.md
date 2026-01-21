@@ -105,10 +105,9 @@ foundry-fundraiser/
 ### Quickstart
 
 ```bash
-git clone https://github.com/0xGearhart/foundry-fundraiser
-cd foundry-fundraiser
-make install
-forge build
+git clone https://github.com/0xGearhart/fundraiser
+cd fundraiser
+make
 ```
 
 ### Environment Setup
@@ -187,6 +186,12 @@ Generate coverage report:
 forge coverage
 ```
 
+Create test coverage report and save to .txt file:
+
+```bash
+make coverage-report
+```
+
 ### Deploy Locally
 
 Start a local Anvil node:
@@ -246,10 +251,10 @@ forge verify-contract <CONTRACT_ADDRESS> src/FundMe.sol:FundMe --chain-id 111551
 
 ### Deployment Addresses
 
-| Network | Contract Address | Explorer |
-|---------|------------------|----------|
-| Sepolia | `TBD` | [View on Etherscan](https://sepolia.etherscan.io) |
-| Mainnet | `TBD` | [View on Etherscan](https://etherscan.io) |
+| Network | Contract Address | Explorer                                          |
+| ------- | ---------------- | ------------------------------------------------- |
+| Sepolia | `TBD`            | [View on Etherscan](https://sepolia.etherscan.io) |
+| Mainnet | `TBD`            | [View on Etherscan](https://etherscan.io)         |
 
 ## Security
 
@@ -279,16 +284,16 @@ For production use, consider:
 ## Gas Optimization
 
 | Function   | Gas Cost |
-|------------|----------|
+| ---------- | -------- |
 | `fund`     | ~86,722  |
 | `withdraw` | ~55,768  |
 | `receive`  | ~71,259  |
 | `fallback` | ~104,750 |
 
-Generate gas report:
+Generate gas report and save to .txt file:
 
 ```bash
-forge test --gas-report
+make gas-report
 ```
 Generate gas snapshot:
 
