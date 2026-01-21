@@ -1,10 +1,10 @@
-# Foundry Fundraiser
+# Fundraiser
 
 **⚠️ This project is not audited, use at your own risk**
 
 ## Table of Contents
 
-- [Foundry Fundraiser](#foundry-fundraiser)
+- [Fundraiser](#fundraiser)
   - [Table of Contents](#table-of-contents)
   - [About](#about)
     - [Key Features](#key-features)
@@ -77,7 +77,7 @@ FundMe is a fundraising contract that accepts ETH donations above a minimum USD 
 
 **Repository Structure:**
 ```
-foundry-fundraiser/
+fundraiser/
 ├── src/
 │   ├── FundMe.sol             # Core fundraising contract
 │   └── PriceConverter.sol     # Price feed helper library
